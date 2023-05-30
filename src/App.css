@@ -1,0 +1,25 @@
+img {
+    width:100%;
+    }
+
+  .content-image {
+    width:30%;
+    margin:10px;
+  
+   border: 2px solid cyan;
+    }
+  .content-image:hover{ border: 2px solid rgb(161, 37, 37);}
+
+
+
+  body {
+    margin: 0%;
+    padding: 0%;
+    font-size: 1rem;
+
+    line-height: 130%;
+    font-family: 'Droid Sans', sans-serif;
+  
+  }
+  
+  

@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react'
 const Context = React.createContext()
 
 function ContextProvider({children}){
- 
+    const [data, setData] = useState([])
    const url = "./data.json"
-   const [data, setData] = useState([])
-     const [cart, setCart] = useState([])
- //   const [cart, setCart] = useState([{     id: 0,    amount: 0 }])
-    const[amountOfProducts, setAmountOfProducts] = useState(0)
+    
+    const [cartId, setCartId] = useState([])
+    const [cartAmount,  setCartAmount] = useState([])
+   
+    
 
     useEffect(() => {
         const getData = async() => {
@@ -19,7 +20,7 @@ function ContextProvider({children}){
                }
                const data = await response.json()
                setData(data)
-             //  console.log(data) 
+               console.log(data) 
             }
             catch(error){console.error(error)}
         }
@@ -27,7 +28,7 @@ function ContextProvider({children}){
 
     },[])
     return(
-        <Context.Provider value={{ data, cart, setCart, amountOfProducts, setAmountOfProducts }}>
+        <Context.Provider value={{ data, cartId, setCartId, cartAmount }}>
                 {children}
         </Context.Provider>
     )

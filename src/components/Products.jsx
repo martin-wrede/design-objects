@@ -3,34 +3,27 @@ import { Context } from '../Context'
 import { Link } from 'react-router-dom'
 
 export default function Products(){
-    const {data} = useContext(Context)
-    const[amountOfProducts, setAmountOfProducts] = useState(0)
-   
-    const { cart, setCart } = useContext(Context)
+    const {data, cart, setCart, amountOfProducts, setAmountOfProducts} = useContext(Context)
+  //  const[amountOfProducts, setAmountOfProducts] = useState(0)
+  // const [cart, setCart] = useState([]);
+ 
+  
 
-    function changeAmount(event){
+    function changeAmount(event){ 
         setAmountOfProducts(event.target.value)
-        if (event.target.value<0){
+        if (event.target.value < 0){
             setAmountOfProducts(0)
         }
     }
     function addToCart(idNumber){
-        setCart({
-           id:idNumber,
-           amount: amountOfProducts
-           }) 
-           console.log( cart)
+        const newItem = {
+            id: idNumber-1, // -1 to get the correct array number
+            amount: amountOfProducts
+        }
+        setCart(prevCart => [...prevCart, newItem]) 
+          
        }
-    /*
-    function addToCart(idNumber){
-     setCart({
-        id:idNumber,
-        amount: amountOfProducts
-        }) 
-        console.log( cart)
-    }
-    */
-
+   
 const products = data[1] && data[1].content_chapter.map((chapter,i)=> {
 return(
     <div key={i}>
@@ -48,7 +41,12 @@ return(
         />
          <button  type="submit" onClick={()=>addToCart(chapter.content_Id)}>{chapter.button}</button>
         <br />
-        ID {cart.id}, Amount {cart.amount}
+        {cart.map((item, index) => (
+        <div key={index}>
+        ID {item.id}, Amount {item.amount}
+        </div>
+        ))}
+
     </div>
     )
 }
